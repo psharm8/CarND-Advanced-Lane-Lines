@@ -54,7 +54,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
+I applied the distortion coefficients to one of the test images using the `cv2.undistort()` function and obtained this result:
 ![alt text][image2]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
@@ -65,7 +65,7 @@ I used a combination of color thresholds from HSL and LAB colorspace to generate
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `unwarp()`, which appears in the 5th code cell of the IPython notebook. The cell uses source and destination points to compute the transform matrix (`M`). The `unwarp()` function takes as inputs an image (`img`), as well as the transformation matrix (`M`). Another function called `recify` is defined in the same cell which undistorts the image and then performs the warp.
+The code for my perspective transform includes a function called `unwarp()`, which appears in the 5th code cell of the IPython notebook. The cell uses source and destination points to compute the transform matrix (`M`). The `unwarp()` function takes as inputs an image (`img`), as well as the transformation matrix (`M`). Another function called `rectify()` is defined in the same cell which undistorts the image and then performs the warp.
 
 I chose the hardcode the source and destination points in the following manner:
 
@@ -98,9 +98,9 @@ I verified that my perspective transform was working as expected by drawing the 
 In code cell 10 the function `sliding_window()` applies a histogram to the lower half of the binary image and uses the peaks to trace the the points upwards. A 2nd order polynomial is then fit over these peak points which give is a lane line.
 
 
-In code cell 12 the function `fit_prev()` uses the points from the `sliding_window()` for finding lines in the next frame. This which reduces the search space. 
+In code cell 12 the function `fit_prev()` uses the points from the `sliding_window()` for finding lines in the next frame. This reduces the search space for finding the peaks. 
 
-An example of polynomial line overlayed with the search windows on a warped binary frame.
+An example of polynomial line overlaid with the search windows on a warped binary frame.
 
 ![alt text][image5]
 
